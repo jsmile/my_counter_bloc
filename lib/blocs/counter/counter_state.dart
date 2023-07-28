@@ -1,10 +1,29 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 part of 'counter_bloc.dart';
 
-abstract class CounterState extends Equatable {
-  const CounterState();
-  
-  @override
-  List<Object> get props => [];
-}
+class CounterState extends Equatable {
+  final int counter;
 
-class CounterInitial extends CounterState {}
+  CounterState({
+    required this.counter,
+  });
+
+  factory CounterState.initial() {
+    return CounterState(counter: 0);
+  }
+
+  @override
+  List<Object> get props => [counter];
+
+  CounterState copyWith({
+    int? counter,
+  }) {
+    return CounterState(
+      counter: counter ?? this.counter,
+    );
+  }
+
+  @override
+  bool get stringify => true; // toSting() 를 위한 정의
+}
